@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WAIST Web App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+
+    <style>
+    /* Make form inputs readable in both themes */
+    input, select, textarea {
+        color: black;
+    }
+    .dark-mode input,
+    .dark-mode select,
+    .dark-mode textarea {
+        color: white;
+        background-color: #1e293b;
+        border: 1px solid #475569;
+    }
+    </style>
+
+
+</head>
+
+<body>
+
+    <!-- Navigation bar -->
+    <nav class="bg-blue-600 text-white px-4 py-3 flex justify-between items-center flex-wrap">
+
+        <!-- LEFT MENU (Show only when logged in) -->
+        {% if session.get('username') %}
+        <div class="flex gap-4 flex-wrap">
+            <a href="/" class="hover:text-gray-200">Home</a>
+            <a href="/transactions" class="hover:text-gray-200">Transactions</a>
+            <a href="/add" class="hover:text-gray-200">Add Expense</a>
+            <a href="/analysis" class="hover:text-gray-200">Analysis</a>
+            <a href="/insights" class="hover:text-gray-200">AI Insights</a>
+        </div>
+        {% endif %}
+
+        <!-- RIGHT MENU -->
+        <div class="flex items-center gap-4 flex-wrap">
+
+            <!-- Dark Mode only for logged-in users -->
+            {% if session.get('username') %}
+            <button id="themeToggle"
+                class="px-3 py-1 bg-white text-blue-600 rounded hover:bg-gray-100">
+                🌙 Dark Mode
+            </button>
+
+            <a href="/change-password" class="hover:text-gray-200">Change Password</a>
+            <a href="/logout" class="hover:text-gray-200">Logout</a>
+            {% else %}
+            <a href="/login" class="hover:text-gray-200">Login</a>
+            <a href="/signup" class="hover:text-gray-200">Sign Up</a>
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+
+
+    <!-- Page content goes here -->
+    <div class="p-4 md:p-6 max-w-4xl mx-auto bg-gray-50 dark:bg-gray-900 dark:text-white min-h-screen">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            root.classList.add('dark');
+            themeToggle.textContent = "☀️ Light Mode";
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (root.classList.contains('dark')) {
+                root.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = "🌙 Dark Mode";
+            } else {
+                root.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = "☀️ Light Mode";
+            }
+        });
+    </script>
+
+    
+</body>
+</html>

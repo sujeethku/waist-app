@@ -48,16 +48,18 @@ This repo captures the evolution of the app from a terminal-based CLI to a funct
 ## 📦 Project Structure
 
 ```text
-waist/
+waist-app/
 ├─ app.py                # CLI entrypoint
 ├─ main.py               # Flask entrypoint (web UI)
-├─ db.py                 # All SQL queries and DB utilities
-├─ analysis.py           # Monthly + category analysis
-├─ init_db.py            # Creates the initial SQLite schema
-├─ populate_db.py        # Adds sample/fake data
+├─ db.py                 # SQL queries & DB utilities
+├─ analysis.py           # Monthly & category analysis
+├─ init_db.py            # Create initial SQLite schema
+├─ populate_db.py        # Adds sample data for testing
+├─ requirements.txt      # Python dependencies
 ├─ templates/
 │  ├─ base.html
 │  ├─ login.html
-│  ├─ expenses.html
-│  └─ add_expense.html
-└─ waist_app.db          # Database file (auto-created if missing)
+│  ├─ add_expense.html
+│  └─ edit_expense.html
+└─ .gitignore
+

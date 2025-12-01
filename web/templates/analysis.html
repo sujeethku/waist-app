@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Analysis Dashboard</h1>
+
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+    <!-- Today's Spending -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 dark:text-white">
+        <h2 class="text-gray-600 dark:text-gray-300 text-sm">Today's Spending</h2>
+        <p class="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">${{ total_today }}</p>
+    </div>
+
+    <!-- This Month -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 dark:text-white">
+        <h2 class="text-gray-600 dark:text-gray-300 text-sm">Total This Month</h2>
+        <p class="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">${{ total_month }}</p>
+    </div>
+
+    <!-- Average Daily Spend -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 dark:text-white">
+        <h2 class="text-gray-600 dark:text-gray-300 text-sm">Avg Daily Spend (This Month)</h2>
+        <p class="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">${{ avg_daily | round(2) }}</p>
+    </div>
+
+    <!-- Highest Category -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 dark:text-white">
+        <h2 class="text-gray-600 dark:text-gray-300 text-sm">Highest Spending Category</h2>
+        {% if highest %}
+        <p class="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">{{ highest[0] }}</p>
+        <p class="text-2xl font-semibold">${{ highest[1] }}</p>
+        {% else %}
+        <p class="text-gray-500 mt-2">No data</p>
+        {% endif %}
+    </div>
+
+    <!-- Total Transactions -->
+    <div class="bg-white dark:bg-gray-800 shadow rounded p-6 dark:text-white">
+        <h2 class="text-gray-600 dark:text-gray-300 text-sm">Total Transactions</h2>
+        <p class="text-3xl font-semibold mt-2 text-gray-900 dark:text-white">{{ count }}</p>
+    </div>
+
+</div>
+
+<h2 class="text-xl font-semibold mb-4">Spending by Category</h2>
+
+<div class="bg-white p-6 rounded shadow mb-8 flex justify-center">
+    <div class="w-48 h-48 md:w-64 md:h-64">
+    <canvas id="categoryChart"></canvas>
+</div>
+
+</div>
+
+
+<script>
+    const ctx = document.getElementById('categoryChart');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ category_labels|tojson }},
+            datasets: [{
+                data: {{ category_amounts|tojson }},
+                backgroundColor: [
+                    '#3b82f6', '#f97316', '#10b981', '#ef4444', '#8b5cf6',
+                    '#14b8a6', '#eab308', '#ec4899', '#6366f1'
+                ],
+                hoverOffset: 8
+            }]
+        }
+    });
+</script>
+
+<!-- Category Breakdown Table -->
+<h2 class="text-xl font-semibold mb-4">Category Breakdown</h2>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow rounded">
+        <tr class="bg-gray-100 dark:bg-gray-700">
+            <th class="px-4 py-2 border-b text-left">Category</th>
+            <th class="px-4 py-2 border-b text-left">Total Spent</th>
+        </tr>
+
+        {% for item in categories %}
+        <tr>
+            <td class="px-4 py-2 border-b">{{ item[0] }}</td>
+            <td class="px-4 py-2 border-b">${{ item[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

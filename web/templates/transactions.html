@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>All Transactions</h1>
+
+<div class="mt-4 mb-4">
+    <a href="/export"
+       class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+        Export as CSV
+    </a>
+</div>
+
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow rounded">
+        <tr class="bg-gray-100 dark:bg-gray-700">
+            <th class="px-4 py-2 bg-gray-100 border-b font-semibold text-left">ID</th>
+            <th class="px-4 py-2 bg-gray-100 border-b font-semibold text-left">ate</th>
+            <th class="px-4 py-2 bg-gray-100 border-b font-semibold text-left">Amount</th>
+            <th class="px-4 py-2 bg-gray-100 border-b font-semibold text-left">Category</th>
+            <th class="px-4 py-2 bg-gray-100 border-b font-semibold text-left">Note</th>
+        </tr>
+
+        {% for row in rows %}
+        <tr>
+            <td class="px-4 py-2 border-b">{{ row[0] }}</td>
+            <td class="px-4 py-2 border-b">{{ row[1] }}</td>
+            <td class="px-4 py-2 border-b">{{ row[2] }}</td>
+            <td class="px-4 py-2 border-b">{{ row[3] }}</td>
+            <td class="px-4 py-2 border-b">{{ row[4] }}</td>
+            <td class="px-4 py-2 border-b">
+                <a href="/edit/{{ row[0] }}" class="text-blue-600 hover:underline mr-4">Edit</a>
+                <a href="/delete/{{ row[0] }}" class="text-red-600 hover:underline">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

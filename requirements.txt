@@ -1,2 +1,5 @@
-flask==3.0.0
-werkzeug==3.0.1
+flask
+python-dotenv
+openai==2.8.1
+tabulate
+colorama

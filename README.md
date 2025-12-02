@@ -16,7 +16,7 @@ WAIST (What Am I Spending Today?) is a **full-stack AI product** designed and im
 
 It combines **LLM-powered categorization**, **AI insight generation**, and a **production-style Flask application** to deliver contextual spending intelligence for users.
 
-This project was built to demonstrate the skills expected of a **Google Product Manager (L5–L7)** in the AI/ML organisation: problem framing, technical depth, product strategy, and execution rigor.
+This project was built to demonstrate the skills expected of a PM in the AI/ML organisation: problem framing, technical depth, product strategy, and execution rigor.
 
 ---
 
@@ -34,7 +34,7 @@ WAIST automates the cognitive load by leveraging **structured LLM reasoning** to
 
 ---
 
-## 🚀 Highlights Relevant to Google PM Roles
+## 🚀 Highlights
 
 ### **1. AI Feature Integration with Evals-First Approach**
 - Designed deterministic prompts using JSON schema reinforcement  
@@ -48,7 +48,7 @@ WAIST automates the cognitive load by leveraging **structured LLM reasoning** to
 ---
 
 ### **2. Strong System Design Foundations**
-WAIST applies Google’s PM expectations around system design:
+WAIST applies expectations around system design:
 
 - Clear separation of responsibilities  
 - Scalable logical architecture  
@@ -69,7 +69,7 @@ Every feature was built to reduce user friction:
 - High-contrast UI  
 - Zero-conf onboarding possible  
 
-This reflects Google’s emphasis on simplicity, clarity, and user empathy.
+This reflects emphasis on simplicity, clarity, and user empathy.
 
 ---
 
@@ -82,6 +82,56 @@ The project followed a structured roadmap:
 4. **Phase 4:** AI categorization + insights engine  
 
 Delivered with PM artifacts: requirements, prioritization, RFC, evals-first tests.
+
+---
+
+## 🚀 Running the App Locally
+
+Follow these steps to start the WAIST application on your machine:
+
+### 1. Clone the repository
+git clone https://github.com/sujeethku/waist-app
+cd waist-app
+
+shell
+Copy code
+
+### 2. Install dependencies
+pip install -r requirements.txt
+
+yaml
+Copy code
+
+### 3. Add your API key  
+Create a file named `.env` in the project root:
+
+OPENAI_API_KEY=your-key-here
+
+shell
+Copy code
+
+### 4. Initialize the database
+python3 init_db.py
+
+kotlin
+Copy code
+
+(Optional sample data)
+python3 populate_db.py
+
+shell
+Copy code
+
+### 5. Start the web application
+cd web
+python3 main.py
+
+yaml
+Copy code
+
+Your app will be available at:
+
+👉 **http://127.0.0.1:5000**
 
 ---
 

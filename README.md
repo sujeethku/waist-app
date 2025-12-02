@@ -1,65 +1,127 @@
-# WAIST – What Am I Spending on Today? 💸
-
-WAIST is a lightweight expense-tracking application built using Python, SQLite, and a simple Flask web interface.  
-The goal of the project is to create a practical, usable tool while exploring rapid prototyping, clean data modelling, and AI-assisted (vibe-coding) workflows.
-
-This repo captures the evolution of the app from a terminal-based CLI to a functional web experience.
+# WAIST — AI-Driven Personal Expense Intelligence System  
+*A full-stack, AI-powered financial insights platform built end-to-end to demonstrate technical product execution, AI integration, and system design depth.*
 
 ---
 
-## 🎯 What the app does today
+## 🎯 Overview
 
-### **Core Features (CLI)**
-- Add a new expense (date, amount, category, note)
-- Display all expenses in a formatted table
-- Delete an expense by ID
-- Input validation to prevent errors
-- Local SQLite storage (`waist_app.db`)
+WAIST (What Am I Spending Today?) is a **full-stack AI product** designed and implemented to showcase:
 
-### **Analysis Features**
-- Total spent in the current month  
-- Category-wise spending summary  
-- Helper functions to support future reporting
+- AI feature integration (OpenAI GPT-4o Mini)
+- End-to-end product thinking  
+- Technical execution across backend, frontend, and data layers  
+- Structured prompting, evals-first thinking, and JSON-safe model usage  
+- System design fundamentals applied in a real, working product  
+- Shipping high-quality user-facing features in iterative phases  
 
-### **Early Web App (Flask)**
-- Basic login / session workflow  
-- HTML templates for:
-  - Login
-  - Viewing expenses
-  - Adding an expense
-- Improved UX planned (Phase 4)
+It combines **LLM-powered categorization**, **AI insight generation**, and a **production-style Flask application** to deliver contextual spending intelligence for users.
+
+This project was built to demonstrate the skills expected of a **Google Product Manager (L5–L7)** in the AI/ML organisation: problem framing, technical depth, product strategy, and execution rigor.
 
 ---
 
-## 🧱 Tech Stack
+## 🧠 Key Problem This Product Solves
 
-- **Python 3.x**
-- **SQLite** (local database)
-- **Flask** (web app)
-- CLI via standard input/output
-- Clear separation of concerns:  
-  - `db.py` → database interactions  
-  - `analysis.py` → reporting & analytics  
-  - `app.py` → CLI flow  
-  - `main.py` → Flask routes
+Typical expense trackers provide raw tables.  
+Users still ask:
+
+> “Where is my money actually going?”  
+> “What patterns am I missing?”  
+> “What should I change next month?”  
+
+WAIST automates the cognitive load by leveraging **structured LLM reasoning** to deliver  
+**explainable, contextual, personalised insights**.
 
 ---
 
-## 📦 Project Structure
+## 🚀 Highlights Relevant to Google PM Roles
 
-```text
-waist-app/
-├─ app.py                # CLI entrypoint
-├─ main.py               # Flask entrypoint (web UI)
-├─ db.py                 # SQL queries & DB utilities
-├─ analysis.py           # Monthly & category analysis
-├─ init_db.py            # Create initial SQLite schema
-├─ populate_db.py        # Adds sample data for testing
-├─ requirements.txt      # Python dependencies
-├─ templates/
-│  ├─ base.html
-│  ├─ login.html
-│  ├─ add_expense.html
-│  └─ edit_expense.html
-└─ .gitignore
+### **1. AI Feature Integration with Evals-First Approach**
+- Designed deterministic prompts using JSON schema reinforcement  
+- Implemented **structured outputs** to eliminate hallucinations  
+- Created two AI microservices:
+  - `get_category_from_ai` → expense categorization  
+  - `generate_insights` → spending intelligence  
+- Ensured model robustness by validating, parsing, and sanitizing LLM output  
+- Architecture supports model-swapping (OpenAI → Gemini → local models)
 
+---
+
+### **2. Strong System Design Foundations**
+WAIST applies Google’s PM expectations around system design:
+
+- Clear separation of responsibilities  
+- Scalable logical architecture  
+- Stateless web server  
+- Persistent SQLite storage (with clear future path to Cloud SQL / Firestore)  
+- Modularized AI service layer  
+
+Detailed architecture diagram included below.
+
+---
+
+### **3. User-Centered Product Thinking**
+Every feature was built to reduce user friction:
+
+- One-tap AI categorization  
+- Insight summaries written at a sixth-grade readability level  
+- Actionable recommendations, not just analytics  
+- High-contrast UI  
+- Zero-conf onboarding possible  
+
+This reflects Google’s emphasis on simplicity, clarity, and user empathy.
+
+---
+
+### **4. Iterative Delivery Across Four Phases**
+The project followed a structured roadmap:
+
+1. **Phase 1:** CLI prototype → Validate core CRUD flows  
+2. **Phase 2:** Persistent DB + analytics  
+3. **Phase 3:** UX/UI with Flask + Tailwind  
+4. **Phase 4:** AI categorization + insights engine  
+
+Delivered with PM artifacts: requirements, prioritization, RFC, evals-first tests.
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+
+    subgraph UI["Frontend (HTML + TailwindCSS)"]
+        A1["Expense Entry"]
+        A2["Transactions Table"]
+        A3["AI Insights View"]
+    end
+
+    subgraph Backend["Flask Backend"]
+        B1["main.py (Routes)"]
+        B2["app.py (App Factory)"]
+        B3["db.py (DB Layer)"]
+        B4["analysis.py"]
+        B5["ai_service.py"]
+    end
+
+    subgraph DB["SQLite Database"]
+        D1["Users"]
+        D2["Transactions"]
+        D3["Categories"]
+    end
+
+    subgraph AI["LLM Service — GPT-4o Mini (Model Swappable)"]
+        E1["Expense Categorization"]
+        E2["Spending Insights"]
+    end
+
+    A1 --> B1
+    A2 --> B1
+    A3 --> B1
+    B1 --> B3
+    B3 --> D2
+    B1 --> B5
+    B5 --> E1
+    B5 --> E2
+    E1 --> B1
+    E2 --> B1

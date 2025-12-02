@@ -1,0 +1,35 @@
+{
+  "description": "Eval set to validate correctness of AI expense categorization.",
+  "tests": [
+    {
+      "id": 1,
+      "input": {
+        "note": "Domino's Pizza",
+        "amount": 25,
+        "date": "2025-02-01",
+        "description": "Dinner"
+      },
+      "expected_category": "Food"
+    },
+    {
+      "id": 2,
+      "input": {
+        "note": "Uber Ride",
+        "amount": 18,
+        "date": "2025-02-01",
+        "description": "Morning office commute"
+      },
+      "expected_category": "Transport"
+    },
+    {
+      "id": 3,
+      "input": {
+        "note": "IKEA Chair",
+        "amount": 140,
+        "date": "2025-02-02",
+        "description": "Furniture purchase"
+      },
+      "expected_category": "Furniture"
+    }
+  ]
+}

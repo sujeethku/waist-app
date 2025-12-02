@@ -135,6 +135,15 @@ Your app will be available at:
 
 ---
 
+### 🧪 AI Evals (Quality Tests)
+The project includes a lightweight eval suite inside `evals/`:
+- `category_eval.json` validates categorization accuracy
+- `insights_eval.json` validates insight generation quality
+
+These evals demonstrate an Evals-First approach used in AI product development.
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid

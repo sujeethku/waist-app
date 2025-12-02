@@ -1,0 +1,31 @@
+{
+  "description": "Eval set to validate correctness of AI insights generation over transaction lists.",
+  "tests": [
+    {
+      "id": 1,
+      "input_transactions": [
+        {"note": "Coles Grocery", "amount": 90, "category": "Groceries", "date": "2025-02-01"},
+        {"note": "7-Eleven Snack", "amount": 15, "category": "Food", "date": "2025-02-01"},
+        {"note": "Uber", "amount": 23, "category": "Transport", "date": "2025-02-02"}
+      ],
+      "expected": {
+        "top_categories_include": ["Groceries", "Food"],
+        "highest_transaction_amount": 90,
+        "summary_should_mention": "total"
+      }
+    },
+    {
+      "id": 2,
+      "input_transactions": [
+        {"note": "Electricity Bill", "amount": 230, "category": "Bills", "date": "2025-02-04"},
+        {"note": "Movie", "amount": 22, "category": "Entertainment", "date": "2025-02-05"},
+        {"note": "Woolworths", "amount": 78, "category": "Groceries", "date": "2025-02-03"}
+      ],
+      "expected": {
+        "top_categories_include": ["Bills"],
+        "highest_transaction_amount": 230,
+        "summary_should_mention": "spending"
+      }
+    }
+  ]
+}

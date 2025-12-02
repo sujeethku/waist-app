@@ -1,6 +1,24 @@
+# Ignore Python cache
 __pycache__/
 *.pyc
-*.db
+
+# Ignore environment files
 .env
-.venv/
+.env.*
+
+# Ignore OS junk
 .DS_Store
+
+# Ignore SQLite databases
+*.db
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore build / distribution files
+build/
+dist/
